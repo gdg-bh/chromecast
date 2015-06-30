@@ -21,7 +21,6 @@ html, body, #wrapper {
    margin: 0;
    padding: 0;
    border: 0;
-   font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
 }
 #wrapper td {
    vertical-align: middle;
@@ -177,7 +176,6 @@ function transcribe(words) {
   <tr>
     <td>
       <form method="get" action="JavaScript:update();">
-        <div align="center">Escreva abaixo</div>
         <input id="input" class="border" type="text" size="30" onwebkitspeechchange="transcribe(this.value)" x-webkit-speech/>
       </form>
     </td>
