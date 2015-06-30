@@ -13,49 +13,49 @@ limitations under the License.
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Hello World</title>
-  <style type="text/css">
-    html, body, #wrapper {
-     height:100%;
-     width: 100%;
-     margin: 0;
-     padding: 0;
-     border: 0;
-   }
-   #wrapper td {
-     vertical-align: middle;
-     text-align: center;
-   }
-   input {
-    font-family: "Arial", Arial, sans-serif;
-    font-size: 40px;
-    font-weight: bold;
-  }
-  .border {
+<title>Hello World</title>
+<style type="text/css">
+html, body, #wrapper {
+   height:100%;
+   width: 100%;
+   margin: 0;
+   padding: 0;
+   border: 0;
+}
+#wrapper td {
+   vertical-align: middle;
+   text-align: center;
+}
+input {
+  font-family: "Arial", Arial, sans-serif;
+  font-size: 40px;
+  font-weight: bold;
+}
+.border {
     border: 2px solid #cccccc;
     border-radius: 5px;
-  }
-  .border:focus {
+}
+.border:focus {
     outline: none;
     border-color: #8ecaed;
     box-shadow: 0 0 5px #8ecaed;
-  }
+}
 </style>
 <script type="text/javascript" src="//www.gstatic.com/cv/js/sender/v1/cast_sender.js"></script>
 <script type="text/javascript">
-  var applicationID = '8243BBBA';
-  var namespace = 'urn:x-cast:gdgbh.chromecast';
-  var session = null;
+var applicationID = '8243BBBA';
+var namespace = 'urn:x-cast:gdgbh.chromecast';
+var session = null;
 /**
  * Call initialization for Cast
  */
- if (!chrome.cast || !chrome.cast.isAvailable) {
+if (!chrome.cast || !chrome.cast.isAvailable) {
   setTimeout(initializeCastApi, 1000);
 }
 /**
  * initialization
  */
- function initializeCastApi() {
+function initializeCastApi() {
   var sessionRequest = new chrome.cast.SessionRequest(applicationID);
   var apiConfig = new chrome.cast.ApiConfig(sessionRequest,
     sessionListener,
@@ -65,31 +65,31 @@ limitations under the License.
 /**
  * initialization success callback
  */
- function onInitSuccess() {
+function onInitSuccess() {
   appendMessage("onInitSuccess");
 }
 /**
  * initialization error callback
  */
- function onError(message) {
+function onError(message) {
   appendMessage("onError: "+JSON.stringify(message));
 }
 /**
  * generic success callback
  */
- function onSuccess(message) {
+function onSuccess(message) {
   appendMessage("onSuccess: "+message);
 }
 /**
  * callback on success for stopping app
  */
- function onStopAppSuccess() {
+function onStopAppSuccess() {
   appendMessage('onStopAppSuccess');
 }
 /**
  * session listener during initialization
  */
- function sessionListener(e) {
+function sessionListener(e) {
   appendMessage('New session ID:' + e.sessionId);
   session = e;
   session.addUpdateListener(sessionUpdateListener);
@@ -98,7 +98,7 @@ limitations under the License.
 /**
  * listener for session updates
  */
- function sessionUpdateListener(isAlive) {
+function sessionUpdateListener(isAlive) {
   var message = isAlive ? 'Session Updated' : 'Session Removed';
   message += ': ' + session.sessionId;
   appendMessage(message);
@@ -111,13 +111,13 @@ limitations under the License.
  * @param {string} namespace The namespace of the message
  * @param {string} message A message string
  */
- function receiverMessage(namespace, message) {
+function receiverMessage(namespace, message) {
   appendMessage("receiverMessage: "+namespace+", "+message);
 };
 /**
  * receiver listener during initialization
  */
- function receiverListener(e) {
+function receiverListener(e) {
   if( e === 'available' ) {
     appendMessage("receiver found");
   }
@@ -128,7 +128,7 @@ limitations under the License.
 /**
  * stop app/session
  */
- function stopApp() {
+function stopApp() {
   session.stop(onStopAppSuccess, onError);
 }
 /**
@@ -136,22 +136,22 @@ limitations under the License.
  * receiver CastMessageBus message handler will be invoked
  * @param {string} message A message string
  */
- function sendMessage(message) {
+function sendMessage(message) {
   if (session!=null) {
     session.sendMessage(namespace, message, onSuccess.bind(this, "Message sent: " + message), onError);
   }
   else {
     chrome.cast.requestSession(function(e) {
-      session = e;
-      session.sendMessage(namespace, message, onSuccess.bind(this, "Message sent: " + message), onError);
-    }, onError);
+        session = e;
+        session.sendMessage(namespace, message, onSuccess.bind(this, "Message sent: " + message), onError);
+      }, onError);
   }
 }
 /**
  * append message to debug message window
  * @param {string} message A message string
  */
- function appendMessage(message) {
+function appendMessage(message) {
   console.log(message);
   var dw = document.getElementById("debugmessage");
   dw.innerHTML += '\n' + JSON.stringify(message);
@@ -159,36 +159,28 @@ limitations under the License.
 /**
  * utility function to handle text typed in by user in the input field
  */
-
-function sorteia(min, max){
-  var numSorteado = Math.floor(Math.random() * 6) + 1;
-  return numSorteado;
-}
-
 function update() {
-  sendMessage(document.querySelector(".min-text").value);
-  alert("Enviado!");
+  sendMessage(document.getElementById("input").value);
+  console.log("Texto enviado...");
 }
 /**
  * handler for the transcribed text from the speech input
  * @param {string} words A transcibed speech string
  */
- function transcribe(words) {
+function transcribe(words) {
   sendMessage(words);
 }
 </script>
 </head>
 <body>
   <table id="wrapper">
-    <tr>
-      <td>
-        <form method="get" action="javascript:update();">
-          <input type="text" class="border min-text" onwebkitspeechchange="transcribe(this.value)" x-webkit-speech/>
-          <input type="text" class="border max-text" onwebkitspeechchange="transcribe(this.value)" x-webkit-speech/>
-          <!-- <input id="input" class="border" type="text" size="30" onwebkitspeechchange="transcribe(this.value)" x-webkit-speech/> -->
-        </form>
-      </td>
-    </tr>
+  <tr>
+    <td>
+      <form method="get" action="JavaScript:update();">
+        <input id="input" class="border" type="text" size="30" onwebkitspeechchange="transcribe(this.value)" x-webkit-speech/>
+      </form>
+    </td>
+  </tr>
   </table>
 
   <!-- Debbugging output -->
@@ -197,8 +189,8 @@ function update() {
     </textarea>
   </div>
 
-  <script type="text/javascript">
-    document.querySelector(".min-text").focus();
-  </script>
+<script type="text/javascript">
+  document.getElementById("input").focus();
+</script>
 </body>
 </html>
