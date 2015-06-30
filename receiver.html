@@ -70,7 +70,7 @@ limitations under the License.
         // create a CastMessageBus to handle messages for a custom namespace
         window.messageBus =
           window.castReceiverManager.getCastMessageBus(
-              'urn:x-cast:com.gdgbh.chromecast');
+              'urn:x-cast:gdgbh.chromecast');
         // handler for the CastMessageBus message event
         window.messageBus.onMessage = function(event) {
           console.log('Message [' + event.senderId + ']: ' + event.data);
