@@ -1,12 +1,9 @@
 <!--
 Copyright (C) 2014 Google Inc. All Rights Reserved.
-
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
-
      http://www.apache.org/licenses/LICENSE-2.0
-
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -46,17 +43,15 @@ input {
 </style>
 <script type="text/javascript" src="//www.gstatic.com/cv/js/sender/v1/cast_sender.js"></script>
 <script type="text/javascript">
-var applicationID = 'A0A461E0';
+var applicationID = '465C3712';
 var namespace = 'urn:x-cast:com.gdgbh.chromecast';
 var session = null;
-
 /**
  * Call initialization for Cast
  */
 if (!chrome.cast || !chrome.cast.isAvailable) {
   setTimeout(initializeCastApi, 1000);
 }
-
 /**
  * initialization
  */
@@ -65,38 +60,32 @@ function initializeCastApi() {
   var apiConfig = new chrome.cast.ApiConfig(sessionRequest,
     sessionListener,
     receiverListener);
-
   chrome.cast.initialize(apiConfig, onInitSuccess, onError);
 };
-
 /**
  * initialization success callback
  */
 function onInitSuccess() {
   appendMessage("onInitSuccess");
 }
-
 /**
  * initialization error callback
  */
 function onError(message) {
   appendMessage("onError: "+JSON.stringify(message));
 }
-
 /**
  * generic success callback
  */
 function onSuccess(message) {
   appendMessage("onSuccess: "+message);
 }
-
 /**
  * callback on success for stopping app
  */
 function onStopAppSuccess() {
   appendMessage('onStopAppSuccess');
 }
-
 /**
  * session listener during initialization
  */
@@ -106,7 +95,6 @@ function sessionListener(e) {
   session.addUpdateListener(sessionUpdateListener);
   session.addMessageListener(namespace, receiverMessage);
 }
-
 /**
  * listener for session updates
  */
@@ -118,7 +106,6 @@ function sessionUpdateListener(isAlive) {
     session = null;
   }
 };
-
 /**
  * utility function to log messages from the receiver
  * @param {string} namespace The namespace of the message
@@ -127,7 +114,6 @@ function sessionUpdateListener(isAlive) {
 function receiverMessage(namespace, message) {
   appendMessage("receiverMessage: "+namespace+", "+message);
 };
-
 /**
  * receiver listener during initialization
  */
@@ -139,14 +125,12 @@ function receiverListener(e) {
     appendMessage("receiver list empty");
   }
 }
-
 /**
  * stop app/session
  */
 function stopApp() {
   session.stop(onStopAppSuccess, onError);
 }
-
 /**
  * send a message to the receiver using the custom namespace
  * receiver CastMessageBus message handler will be invoked
@@ -163,7 +147,6 @@ function sendMessage(message) {
       }, onError);
   }
 }
-
 /**
  * append message to debug message window
  * @param {string} message A message string
@@ -173,14 +156,12 @@ function appendMessage(message) {
   var dw = document.getElementById("debugmessage");
   dw.innerHTML += '\n' + JSON.stringify(message);
 };
-
 /**
  * utility function to handle text typed in by user in the input field
  */
 function update() {
   sendMessage(document.getElementById("input").value);
 }
-
 /**
  * handler for the transcribed text from the speech input
  * @param {string} words A transcibed speech string
@@ -192,13 +173,13 @@ function transcribe(words) {
 </head>
 <body>
   <table id="wrapper">
-	<tr>
-		<td>
-			<form method="get" action="JavaScript:update();">
-				<input id="input" class="border" type="text" size="30" onwebkitspeechchange="transcribe(this.value)" x-webkit-speech/>
-			</form>
-		</td>
-	</tr>
+  <tr>
+    <td>
+      <form method="get" action="JavaScript:update();">
+        <input id="input" class="border" type="text" size="30" onwebkitspeechchange="transcribe(this.value)" x-webkit-speech/>
+      </form>
+    </td>
+  </tr>
   </table>
 
   <!-- Debbugging output -->
