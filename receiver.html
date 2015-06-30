@@ -74,7 +74,7 @@ limitations under the License.
 
         // Cria um CastMessageBus que irá trocar as mensagens dentro do namespace configurado
         window.messageBus =
-                window.castReceiverManager.getCastMessageBus('urn:x-cast:gdgbh-chromecast');
+                window.castReceiverManager.getCastMessageBus('urn:x-cast:com.gdgbh.chromecast');
 
         // Responde pelo evento OnMessage do CastMessageBus - lida com as mensagens recebidas
         window.messageBus.onMessage = function (event) {
