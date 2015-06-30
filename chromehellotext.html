@@ -160,9 +160,13 @@ function appendMessage(message) {
  * utility function to handle text typed in by user in the input field
  */
 function update() {
-  var msgForSend = document.getElementById("input").value;
+  var msgForSend = document.getElementById("input").value,
+      numSorteado = Math.floor(Math.random() * parseInt(msgForSend)) + 1;
+
+  document.querySelector('.num-sorteado').innerHTML = "Número sorteado: <h1>"+numSorteado+"</h1>";
+  console.log(numSorteado);
+
   sendMessage("Mensagem: "+msgForSend);
-  console.log("Texto enviado...");
 }
 /**
  * handler for the transcribed text from the speech input
