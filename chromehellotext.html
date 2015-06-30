@@ -32,13 +32,13 @@ html, body, #wrapper {
 input {
   font-family: "Arial", Arial, sans-serif;
   font-size: 40px;
-  font-weight: bold;	
+  font-weight: bold;
 }
 .border {
     border: 2px solid #cccccc;
     border-radius: 5px;
 }
-.border:focus { 
+.border:focus {
     outline: none;
     border-color: #8ecaed;
     box-shadow: 0 0 5px #8ecaed;
@@ -46,8 +46,8 @@ input {
 </style>
 <script type="text/javascript" src="//www.gstatic.com/cv/js/sender/v1/cast_sender.js"></script>
 <script type="text/javascript">
-var applicationID = '794B7BBF';
-var namespace = 'urn:x-cast:com.google.cast.sample.helloworld';
+var applicationID = 'A0A461E0';
+var namespace = 'urn:x-cast:gdgbh-chromecast';
 var session = null;
 
 /**
@@ -103,7 +103,7 @@ function onStopAppSuccess() {
 function sessionListener(e) {
   appendMessage('New session ID:' + e.sessionId);
   session = e;
-  session.addUpdateListener(sessionUpdateListener);  
+  session.addUpdateListener(sessionUpdateListener);
   session.addMessageListener(namespace, receiverMessage);
 }
 
@@ -199,7 +199,7 @@ function transcribe(words) {
 			</form>
 		</td>
 	</tr>
-  </table>	
+  </table>
 
   <!-- Debbugging output -->
   <div style="margin:10px; visibility:hidden;">
