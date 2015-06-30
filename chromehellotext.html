@@ -183,8 +183,8 @@ function update() {
     <tr>
       <td>
         <form method="get" action="javascript:update();">
-          <input type="text" class="border min-text" >
-          <input type="text" class="border max-text" >
+          <input type="text" class="border min-text" onwebkitspeechchange="transcribe(this.value)" x-webkit-speech/>
+          <input type="text" class="border max-text" onwebkitspeechchange="transcribe(this.value)" x-webkit-speech/>
           <!-- <input id="input" class="border" type="text" size="30" onwebkitspeechchange="transcribe(this.value)" x-webkit-speech/> -->
         </form>
       </td>
