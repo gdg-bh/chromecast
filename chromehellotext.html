@@ -163,10 +163,10 @@ function update() {
   var msgForSend = document.getElementById("input").value,
       numSorteado = Math.floor(Math.random() * parseInt(msgForSend)) + 1;
 
-  document.querySelector('.num-sorteado').innerHTML = "Número sorteado: <h1>"+numSorteado+"</h1>";
+
   console.log(numSorteado);
 
-  sendMessage("Mensagem: "+msgForSend);
+  sendMessage("Número sorteado: "+numSorteado);
 }
 /**
  * handler for the transcribed text from the speech input
